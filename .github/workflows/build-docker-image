@@ -1,7 +1,7 @@
 name: Publish Docker Image
 on:
   push:
-    tags: [ 'v*.*.*', 'v*.*', 'v*', 'latest' ]
+    branches: ['master']
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: nkanaev/yarr
