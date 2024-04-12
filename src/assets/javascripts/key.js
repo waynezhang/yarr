@@ -83,7 +83,7 @@ var helperFunctions = {
     var newpos = scroll.scrollTop + (height - padding) * direction
 
     if (typeof scroll.scrollTo == 'function') {
-      scroll.scrollTo({ top: newpos, left: 0, behavior: 'smooth' })
+      scroll.scrollTo({ top: newpos, left: 0, behavior: 'instant' })
     } else {
       scroll.scrollTop = newpos
     }
@@ -178,8 +178,8 @@ var keybindings = {
   "k": shortcutFunctions.previousItem,
   "l": shortcutFunctions.nextFeed,
   "h": shortcutFunctions.previousFeed,
-  "f": shortcutFunctions.scrollForward,
-  "b": shortcutFunctions.scrollBackward,
+  "d": shortcutFunctions.scrollForward,
+  "u": shortcutFunctions.scrollBackward,
   "1": shortcutFunctions.showUnread,
   "2": shortcutFunctions.showStarred,
   "3": shortcutFunctions.showAll,
