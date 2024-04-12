@@ -1,5 +1,6 @@
 # upcoming 
 
+- (new) Add item navigation buttons in content toolbar 
 - (new) Add esc keyboard shortcuts to hide current dialog
 - (new) Add ? keyboard shortcuts to show shortcuts dialog
 - (new) Add g/G keyboard shortcuts to scroll to top/bottom feed

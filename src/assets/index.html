@@ -326,6 +326,18 @@
                     <span class="icon">{% inline "external-link.svg" %}</span>
                 </a>
                 <div class="flex-grow-1"></div>
+                <button class="toolbar-item"
+                        title="Previous"
+                        @click="navigateToPreviousItem"
+                        :disabled="itemSelected == items[0].id">
+                    <span class="icon">{% inline "arrow-up.svg" %}</span>
+                </button>
+                <button class="toolbar-item"
+                        title="Next"
+                        @click="navigateToNextItem"
+                        :disabled="itemSelected == items[items.length - 1].id">
+                    <span class="icon">{% inline "arrow-down.svg" %}</span>
+                </button>
                 <button class="toolbar-item" @click="itemSelected=null" title="Close Article">
                     <span class="icon">{% inline "x.svg" %}</span>
                 </button>
@@ -347,6 +359,7 @@
                         <audio class="w-100" controls v-if="itemSelectedDetails.podcast_url" :src="itemSelectedDetails.podcast_url"></audio>
                     </div>
                     <div v-html="itemSelectedContent"></div>
+                    <hr>
                 </div>
             </div>
         </div>
