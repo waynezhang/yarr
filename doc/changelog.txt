@@ -1,5 +1,6 @@
 # upcoming 
 
+- (new) Add g/G keyboard shortcuts to scroll to top/bottom feed
 - (new) Fever API support (thanks to @icefed)
 - (fix) duplicate articles caused by the same feed addition (thanks to @adaszko)
 - (fix) relative article links (thanks to @adazsko for the report)

@@ -60,7 +60,7 @@ var helperFunctions = {
       return
     }
 
-    var newPosition = currentFeedPosition+relativePosition
+    var newPosition = currentFeedPosition + relativePosition
     if (newPosition < 0 || newPosition >= navigationList.length) return
 
     vm.feedSelected = navigationList[newPosition]
@@ -83,7 +83,7 @@ var helperFunctions = {
     var newpos = scroll.scrollTop + (height - padding) * direction
 
     if (typeof scroll.scrollTo == 'function') {
-      scroll.scrollTo({top: newpos, left: 0, behavior: 'smooth'})
+      scroll.scrollTo({ top: newpos, left: 0, behavior: 'smooth' })
     } else {
       scroll.scrollTop = newpos
     }
@@ -105,7 +105,7 @@ var shortcutFunctions = {
   },
   markAllRead: function() {
     // same condition as 'Mark all read button'
-    if (vm.filterSelected == 'unread'){
+    if (vm.filterSelected == 'unread') {
       vm.markItemsRead()
     }
   },
@@ -117,13 +117,13 @@ var shortcutFunctions = {
   focusSearch: function() {
     document.getElementById("searchbar").focus()
   },
-  nextItem(){
+  nextItem() {
     helperFunctions.navigateToItem(+1)
   },
   previousItem() {
     helperFunctions.navigateToItem(-1)
   },
-  nextFeed(){
+  nextFeed() {
     helperFunctions.navigateToFeed(+1)
   },
   previousFeed() {
@@ -134,6 +134,20 @@ var shortcutFunctions = {
   },
   scrollBackward: function() {
     helperFunctions.scrollContent(-1)
+  },
+  scrollToFeedTop: function() {
+    const scroll = document.querySelector('#item-list-scroll')
+    scroll.scroll(0, 0)
+    if (vm.items.length !== 0) {
+      vm.itemSelected = vm.items[0].id
+    }
+  },
+  scrollToFeedBottom: function() {
+    const scroll = document.querySelector('#item-list-scroll')
+    scroll.scroll(0, scroll.scrollHeight)
+    if (vm.items.length !== 0) {
+      vm.itemSelected = vm.items[vm.items.length - 1].id
+    }
   },
   showAll() {
     vm.filterSelected = ''
@@ -163,6 +177,8 @@ var keybindings = {
   "1": shortcutFunctions.showUnread,
   "2": shortcutFunctions.showStarred,
   "3": shortcutFunctions.showAll,
+  "g": shortcutFunctions.scrollToFeedTop,
+  "G": shortcutFunctions.scrollToFeedBottom,
 }
 
 var codebindings = {
@@ -186,15 +202,15 @@ var codebindings = {
 function isTextBox(element) {
   var tagName = element.tagName.toLowerCase()
   // Input elements that aren't text
-  var inputBlocklist = ['button','checkbox','color','file','hidden','image','radio','range','reset','search','submit']
+  var inputBlocklist = ['button', 'checkbox', 'color', 'file', 'hidden', 'image', 'radio', 'range', 'reset', 'search', 'submit']
 
   return tagName === 'textarea' ||
-    ( tagName === 'input'
+    (tagName === 'input'
       && inputBlocklist.indexOf(element.getAttribute('type').toLowerCase()) == -1
     )
 }
 
-document.addEventListener('keydown',function(event) {
+document.addEventListener('keydown', function(event) {
   // Ignore while focused on text or
   // when using modifier keys (to not clash with browser behaviour)
   if (isTextBox(event.target) || event.metaKey || event.ctrlKey || event.altKey) {
