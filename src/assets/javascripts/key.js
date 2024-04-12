@@ -158,6 +158,12 @@ var shortcutFunctions = {
   showStarred() {
     vm.filterSelected = 'starred'
   },
+  showShortcuts() {
+    vm.showSettings('shortcuts')
+  },
+  hideSettings() {
+    vm.settings = ''
+  }
 }
 
 // If you edit, make sure you update the help modal
@@ -179,6 +185,8 @@ var keybindings = {
   "3": shortcutFunctions.showAll,
   "g": shortcutFunctions.scrollToFeedTop,
   "G": shortcutFunctions.scrollToFeedBottom,
+  "Escape": shortcutFunctions.hideSettings,
+  "?": shortcutFunctions.showShortcuts,
 }
 
 var codebindings = {
