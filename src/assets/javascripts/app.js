@@ -438,6 +438,11 @@ var vm = new Vue({
       })
     },
     itemListCloseToBottom: function() {
+      const itemListVisible = document.querySelector("#col-item-list").offsetWidth > 0
+      if (!itemListVisible) {
+        const itemPosition = vm.items.findIndex(function(x) { return x.id === vm.itemSelected })
+        return itemPosition != -1 && (vm.items.length - itemPosition) < 3
+      }
       // approx. vertical space at the bottom of the list (loading el & paddings) when 1rem = 16px
       var bottomSpace = 70
       var scale = (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16) / 16
@@ -630,6 +635,7 @@ var vm = new Vue({
     },
     navigateToNextItem: function() {
       helperFunctions.navigateToItem(+1)
+      vm.loadMoreItems()
     },
     navigateToPreviousItem: function() {
       helperFunctions.navigateToItem(-1)
