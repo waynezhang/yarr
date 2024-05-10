@@ -278,6 +278,9 @@ var vm = new Vue({
 
       return this.itemSelectedDetails.content || ''
     },
+    itemListCollapsed: function() {
+      return document.querySelector("#col-item-list").offsetWidth == 0
+    },
   },
   watch: {
     'theme': {
@@ -438,8 +441,7 @@ var vm = new Vue({
       })
     },
     itemListCloseToBottom: function() {
-      const itemListVisible = document.querySelector("#col-item-list").offsetWidth > 0
-      if (!itemListVisible) {
+      if (vm.itemListCollapsed) {
         const itemPosition = vm.items.findIndex(function(x) { return x.id === vm.itemSelected })
         return itemPosition != -1 && (vm.items.length - itemPosition) < 3
       }
@@ -531,7 +533,7 @@ var vm = new Vue({
     updateFeedLink: function(feed) {
       var newLink = prompt('Enter feed link', feed.feed_link)
       if (newLink) {
-        api.feeds.update(feed.id, {feed_link: newLink}).then(function() {
+        api.feeds.update(feed.id, { feed_link: newLink }).then(function() {
           feed.feed_link = newLink
         })
       }
@@ -643,7 +645,6 @@ var vm = new Vue({
     },
     navigateToNextItem: function() {
       helperFunctions.navigateToItem(+1)
-      vm.loadMoreItems()
     },
     navigateToPreviousItem: function() {
       helperFunctions.navigateToItem(-1)

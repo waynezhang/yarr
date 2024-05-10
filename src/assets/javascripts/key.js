@@ -45,6 +45,7 @@ var helperFunctions = {
       var target = handle && handle.parentElement
 
       if (target && scroll) scrollto(target, scroll)
+      vm.loadMoreItems()
     })
   },
   // navigation helper, navigate relative to selected feed
