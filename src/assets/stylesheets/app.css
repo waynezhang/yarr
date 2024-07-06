@@ -8,6 +8,7 @@ html {
 
 body {
   overscroll-behavior: none;
+  touch-action: pan-x pan-y;
 }
 
 /* bootstrap customizations */
@@ -196,6 +197,10 @@ select.form-control:not([multiple]):not([size]) {
 .selectgroup-label:hover,
 .dropdown-item:hover {
   background-color: #f0f0f0;
+}
+
+#bottom-toolbar {
+  display: none !important;
 }
 
 .expanded {
@@ -480,6 +485,10 @@ a,
   border-color: #0080d4;
 }
 
+.theme-light .toolbar {
+  background-color: #fff;
+}
+
 /* theme: sepia */
 
 .theme-sepia,
@@ -487,7 +496,8 @@ a,
 .theme-sepia .dropdown-menu,
 .theme-sepia .form-control,
 .theme-sepia .modal-content,
-.theme-sepia .toolbar-search {
+.theme-sepia .toolbar-search,
+.theme-sepia .toolbar {
   background-color: #f4f0e5 !important;
 }
 
@@ -514,7 +524,8 @@ a,
 .theme-night .dropdown-item,
 .theme-night .form-control,
 .theme-night .modal-content,
-.theme-night .toolbar-search {
+.theme-night .toolbar-search,
+.theme-night .toolbar {
   color: #d1d1d1;
   background-color: #0e0e0e;
 }
@@ -645,5 +656,18 @@ a,
   .toolbar-item,
   .toolbar-search {
     padding: .5rem;
+  }
+
+  #top-toolbar .toolbar-item[title="Previous"],
+  #top-toolbar .toolbar-item[title="Next"] {
+    display: none !important;
+  }
+
+  #bottom-toolbar {
+    display: inline-flex !important;
+  }
+
+  #bottom-toolbar .toolbar-item {
+    width: 50%;
   }
 }
