@@ -201,6 +201,7 @@ select.form-control:not([multiple]):not([size]) {
 
 #bottom-toolbar {
   display: none !important;
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .expanded {
@@ -649,8 +650,8 @@ a,
   }
 
   .toolbar {
-    min-height: 3rem !important;
-    max-height: 3rem !important;
+    min-height: 4rem !important;
+    max-height: 4rem !important;
   }
 
   .toolbar-item,
@@ -665,6 +666,8 @@ a,
 
   #bottom-toolbar {
     display: inline-flex !important;
+    min-height: calc(env(safe-area-inset-bottom, 0) + 4rem) !important;
+    max-height: calc(env(safe-area-inset-bottom, 0) + 4rem) !important;
   }
 
   #bottom-toolbar .toolbar-item {
