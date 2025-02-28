@@ -200,11 +200,13 @@
             <span class="icon">{% inline "more-horizontal.svg" %}</span>
           </template>
           <header class="dropdown-header">{{ current.feed.title }}</header>
-          <a class="dropdown-item" :href="current.feed.link" target="_blank" v-if="current.feed.link">
+          <a class="dropdown-item" :href="current.feed.link" rel="noopener noreferrer" target="_blank"
+            referrerpolicy="no-referrer" v-if="current.feed.link">
             <span class="icon mr-1">{% inline "globe.svg" %}</span>
             Website
           </a>
-          <a class="dropdown-item" :href="current.feed.feed_link" target="_blank" v-if="current.feed.feed_link">
+          <a class="dropdown-item" :href="current.feed.feed_link" rel="noopener noreferrer" target="_blank"
+            referrerpolicy="no-referrer" v-if="current.feed.feed_link">
             <span class="icon mr-1">{% inline "rss.svg" %}</span>
             Feed Link
           </a>
@@ -311,17 +313,18 @@
           title="Read Here">
           <span class="icon" :class="{'icon-loading': loading.readability}">{% inline "book-open.svg" %}</span>
         </button>
-        <a class="toolbar-item" :href="itemSelectedDetails.link" target="_blank" title="Open Link">
+        <a class="toolbar-item" :href="itemSelectedDetails.link" rel="noopener noreferrer" target="_blank"
+          referrerpolicy="no-referrer" title="Open Link">
           <span class="icon">{% inline "external-link.svg" %}</span>
         </a>
         <div class="flex-grow-1"></div>
-        <button class="toolbar-item" title="Previous" @click="navigateToPreviousItem"
+        <button class="toolbar-item" @click="navigateToItem(-1)" title="Previous Article"
           :disabled="itemSelected == items[0].id">
-          <span class="icon">{% inline "arrow-up.svg" %}</span>
+          <span class="icon">{% inline "chevron-left.svg" %}</span>
         </button>
-        <button class="toolbar-item" title="Next" @click="navigateToNextItem"
+        <button class="toolbar-item" @click="navigateToItem(+1)" title="Next Article"
           :disabled="itemSelected == items[items.length - 1].id">
-          <span class="icon">{% inline "arrow-down.svg" %}</span>
+          <span class="icon">{% inline "chevron-right.svg" %}</span>
         </button>
         <button class="toolbar-item" @click="itemSelected=null" title="Close Article">
           <span class="icon">{% inline "x.svg" %}</span>
@@ -330,11 +333,11 @@
       <div id="bottom-toolbar" class="toolbar px-2 d-flex align-items-center fixed-bottom border-top"
         v-if="itemSelectedDetails">
         <div class="flex-grow-1"></div>
-        <button class="toolbar-item" title="Previous" @click="navigateToPreviousItem"
+        <button class="toolbar-item" title="Previous" @click="navigateToItem(-1)"
           :disabled="itemSelected == items[0].id">
           <span class="icon">{% inline "arrow-up.svg" %}</span>
         </button>
-        <button class="toolbar-item" title="Next" @click="navigateToNextItem"
+        <button class="toolbar-item" title="Next" @click="navigateToItem(+1)"
           :disabled="itemSelected == items[items.length - 1].id">
           <span class="icon">{% inline "arrow-down.svg" %}</span>
         </button>
@@ -454,14 +457,18 @@
             <td><kbd>d</kbd> <kbd>u</kbd></td>
             <td>scroll content forward / backward</td>
           <tr>
+          <tr>
             <td><kbd>g</kbd></td>
             <td>scroll to top feed</td>
+          <tr>
           <tr>
             <td><kbd>G</kbd></td>
             <td>scroll to bottom feed</td>
           <tr>
+          <tr>
             <td><kbd>esc</kbd></td>
             <td>hide current dialog</td>
+          <tr>
           <tr>
             <td><kbd>?</kbd></td>
             <td>show this shortcuts dialog</td>
