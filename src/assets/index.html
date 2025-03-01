@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./static/stylesheets/app.css">
   <link rel="icon" href="./static/graphicarts/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="./static/graphicarts/favicon.png" type="image/png">
-  <link rel="manifest" href="./manifest.json" />
+  <link rel="manifest" href="./manifest.json">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
   <script>
     window.app = window.app || {}
@@ -44,7 +44,6 @@
           <template v-slot:button>
             <span class="icon">{% inline "more-horizontal.svg" %}</span>
           </template>
-
           <button class="dropdown-item" @click="showSettings('create')">
             <span class="icon mr-1">{% inline "plus.svg" %}</span>
             New Feed
@@ -54,9 +53,7 @@
             <span class="icon mr-1">{% inline "rotate-cw.svg" %}</span>
             Refresh Feeds
           </button>
-
           <div class="dropdown-divider"></div>
-
           <header class="dropdown-header">Theme</header>
           <div class="row text-center m-0">
             <button class="btn btn-link col-4 px-0 rounded-0" :class="'theme-'+t" @click.stop="theme.name = t"
@@ -64,9 +61,7 @@
               <span class="icon" v-if="theme.name == t">{% inline "check.svg" %}</span>
             </button>
           </div>
-
           <div class="dropdown-divider"></div>
-
           <header class="dropdown-header">Auto Refresh</header>
           <div class="row text-center m-0">
             <button class="dropdown-item col-4 px-0" :class="{active: !refreshRate}"
@@ -82,9 +77,7 @@
             <button class="dropdown-item col-4 px-0" :class="{active: refreshRate == 240}"
               @click.stop="refreshRate = 240">4h</button>
           </div>
-
           <div class="dropdown-divider"></div>
-
           <header class="dropdown-header">Show first</header>
           <div class="d-flex text-center">
             <button class="dropdown-item px-0" :class="{active: itemSortNewestFirst}"
@@ -189,8 +182,6 @@
           title="Mark All Read">
           <span class="icon">{% inline "check.svg" %}</span>
         </button>
-
-
         <button class="btn btn-link toolbar-item px-2 ml-2" v-if="!current.type" disabled>
           <span class="icon">{% inline "more-horizontal.svg" %}</span>
         </button>
@@ -271,7 +262,7 @@
                 {{ (feedsById[item.feed_id] || {}).title }}
               </small>
               <small class="flex-shrink-0"><relative-time v-bind:title="formatDate(item.date)"
-                  :val="item.date" /></small>
+                  :val="item.date"></relative-time></small>
             </div>
             <div>{{ item.title || 'untitled' }}</div>
           </div>
@@ -297,13 +288,11 @@
           <template v-slot:button>
             <span class="icon">{% inline "sliders.svg" %}</span>
           </template>
-
           <button class="dropdown-item" :class="{active: !theme.font}" @click.stop="theme.font = ''">sans-serif</button>
           <button class="dropdown-item font-serif" :class="{active: theme.font == 'serif'}"
             @click.stop="theme.font = 'serif'">serif</button>
           <button class="dropdown-item font-monospace" :class="{active: theme.font == 'monospace'}"
             @click.stop="theme.font = 'monospace'">monospace</button>
-
           <div class="d-flex text-center">
             <button class="dropdown-item" style="font-size: 0.8rem" @click.stop="incrFont(-1)">A</button>
             <button class="dropdown-item" style="font-size: 1.2rem" @click.stop="incrFont(1)">A</button>
@@ -332,16 +321,17 @@
       </div>
       <div id="bottom-toolbar" class="toolbar px-2 d-flex align-items-center fixed-bottom border-top"
         v-if="itemSelectedDetails">
-        <div class="flex-grow-1"></div>
+        <button class="toolbar-item w-25" @click="itemSelected=null" title="Close Article">
+          <span class="icon">{% inline "x.svg" %}</span>
+        </button>
         <button class="toolbar-item" title="Previous" @click="navigateToItem(-1)"
           :disabled="itemSelected == items[0].id">
-          <span class="icon">{% inline "arrow-up.svg" %}</span>
+          <span class="icon">{% inline "chevron-left.svg" %}</span>
         </button>
         <button class="toolbar-item" title="Next" @click="navigateToItem(+1)"
           :disabled="itemSelected == items[items.length - 1].id">
-          <span class="icon">{% inline "arrow-down.svg" %}</span>
+          <span class="icon">{% inline "chevron-right.svg" %}</span>
         </button>
-        <div class="flex-grow-1"></div>
       </div>
       <div v-if="itemSelectedDetails" ref="content" class="content px-4 pt-3 pb-5 border-top overflow-auto"
         :class="{'font-serif': theme.font == 'serif', 'font-monospace': theme.font == 'monospace'}"
@@ -407,29 +397,33 @@
       </div>
       <div v-else-if="settings=='shortcuts'">
         <p class="cursor-default"><b>Keyboard Shortcuts</b></p>
-
         <table class="table table-borderless table-sm table-compact m-0">
           <tr>
-            <td><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></td>
+            <td><kbd>1</kbd>
+              <kbd>2</kbd>
+              <kbd>3</kbd>
+            </td>
             <td>show unread / starred / all feeds</td>
           </tr>
           <tr>
             <td><kbd>/</kbd></td>
             <td>focus the search bar</td>
           </tr>
-
           <tr>
             <td colspan=2>&nbsp;</td>
           </tr>
           <tr>
-            <td><kbd>j</kbd> <kbd>k</kbd></td>
+            <td><kbd>j</kbd>
+              <kbd>k</kbd>
+            </td>
             <td>next / prev article</td>
           </tr>
           <tr>
-            <td><kbd>l</kbd> <kbd>h</kbd></td>
+            <td><kbd>l</kbd>
+              <kbd>h</kbd>
+            </td>
             <td>next / prev feed</td>
           </tr>
-
           <tr>
             <td colspan=2>&nbsp;</td>
           </tr>
@@ -454,21 +448,23 @@
             <td>read here</td>
           </tr>
           <tr>
-            <td><kbd>d</kbd> <kbd>u</kbd></td>
+            <td><kbd>d</kbd>
+              <kbd>u</kbd>
+            </td>
             <td>scroll content forward / backward</td>
-          <tr>
+          </tr>
           <tr>
             <td><kbd>g</kbd></td>
             <td>scroll to top feed</td>
-          <tr>
+          </tr>
           <tr>
             <td><kbd>G</kbd></td>
             <td>scroll to bottom feed</td>
-          <tr>
+          </tr>
           <tr>
             <td><kbd>esc</kbd></td>
             <td>hide current dialog</td>
-          <tr>
+          </tr>
           <tr>
             <td><kbd>?</kbd></td>
             <td>show this shortcuts dialog</td>
